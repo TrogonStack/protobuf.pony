@@ -1,0 +1,24 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ponyc + corral via ponyup
+        run: |
+          sh -c "$(curl --proto '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/ponylang/ponyup/latest-release/ponyup-init.sh)"
+          ~/.local/share/ponyup/bin/ponyup default x86_64-unknown-linux-gnu
+          ~/.local/share/ponyup/bin/ponyup update ponyc release
+          ~/.local/share/ponyup/bin/ponyup update corral release
+          echo "$HOME/.local/share/ponyup/bin" >> "$GITHUB_PATH"
+      - name: Build + test
+        run: |
+          mkdir -p build
+          corral run -- ponyc --path . -o build test/
+          ./build/test
