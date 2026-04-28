@@ -5,18 +5,35 @@ on:
     branches: [main]
   pull_request:
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
+
+      - name: Cache ponyup toolchain
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/ponyup
+          key: ponyup-${{ runner.os }}-release-v1
+
       - name: Install ponyc + corral via ponyup
         run: |
-          sh -c "$(curl --proto '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/ponylang/ponyup/latest-release/ponyup-init.sh)"
-          ~/.local/share/ponyup/bin/ponyup default x86_64-unknown-linux-gnu
-          ~/.local/share/ponyup/bin/ponyup update ponyc release
-          ~/.local/share/ponyup/bin/ponyup update corral release
+          if [ ! -x ~/.local/share/ponyup/bin/ponyup ]; then
+            sh -c "$(curl --proto '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/ponylang/ponyup/latest-release/ponyup-init.sh)"
+            ~/.local/share/ponyup/bin/ponyup default x86_64-unknown-linux-gnu
+            ~/.local/share/ponyup/bin/ponyup update ponyc release
+            ~/.local/share/ponyup/bin/ponyup update corral release
+          fi
           echo "$HOME/.local/share/ponyup/bin" >> "$GITHUB_PATH"
+
+      - name: Fetch corral deps
+        run: corral fetch
+
       - name: Build + test
         run: |
           mkdir -p build

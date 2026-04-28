@@ -8,6 +8,7 @@ tasks:
   test:
     desc: Build and run unit + property tests
     cmds:
+      - corral fetch
       - mkdir -p build
       - corral run -- ponyc --path . -o build test/
       - ./build/test

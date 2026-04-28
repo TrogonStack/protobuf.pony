@@ -6,7 +6,8 @@ validation. The runtime that generated Pony code (emitted by
 
 ## What's here
 
-- **`Varint`** — varint encode/decode + zigzag encode/decode (i32/i64).
+- **`Varint`** — varint encode/decode (`Array[U8] iso^` ↔ `U64`).
+- **`ZigZag`** — zigzag encode/decode for signed scalars (`I32`/`I64`).
 - **`Tag`** + **`TagCodec`** — protobuf field tag (field number + wire type).
 - **`WireType`** — typed union (`WireVarint | WireFixed64 | WireLenDelim |
   WireFixed32`); proto2 group wire types are deliberately omitted.
@@ -28,14 +29,12 @@ validation. The runtime that generated Pony code (emitted by
 
 ## Install
 
+Add to your `corral.json` `deps`:
+
 ```json
 {
-  "deps": [
-    {
-      "locator": "github.com/TrogonStack/protobuf-pony",
-      "version": "0.1.0"
-    }
-  ]
+  "locator": "github.com/TrogonStack/protobuf-pony",
+  "version": "0.1.0"
 }
 ```
 
