@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.1](https://github.com/TrogonStack/protobuf.pony/compare/protobuf.pony-v0.1.0...protobuf.pony-v0.1.1) (2026-05-06)
+
+
+### Features
+
+* protobuf-pony runtime library ([bcd9120](https://github.com/TrogonStack/protobuf.pony/commit/bcd9120b92d6cb6e33baf1fe662f27461d4b6192))
+
+
+### Bug Fixes
+
+* use GH_PAT_RELEASE_PLEASE_ACTION token in release-please workflow ([2c6daac](https://github.com/TrogonStack/protobuf.pony/commit/2c6daace47896f641c9a9307f3c27ee18499bfe3))
+
 ## 0.1.0 - 2026-04-28
 
 ### Features
