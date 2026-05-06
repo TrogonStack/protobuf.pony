@@ -1,4 +1,4 @@
-# protobuf-pony
+# protobuf.pony
 
 Pure Pony protobuf runtime — wire codec, framing, scalar codecs, UTF-8
 validation. The runtime that generated Pony code (emitted by
@@ -33,7 +33,7 @@ Add to your `corral.json` `deps`:
 
 ```json
 {
-  "locator": "github.com/TrogonStack/protobuf-pony",
+  "locator": "github.com/TrogonStack/protobuf.pony",
   "version": "0.1.0"
 }
 ```
@@ -77,4 +77,4 @@ task test
 
 ## License
 
-BSD-2-Clause.
+MIT.

@@ -1,5 +1,5 @@
 {
-  "locator": "github.com/TrogonStack/protobuf-pony",
+  "locator": "github.com/TrogonStack/protobuf.pony",
   "version": "0.1.0",
   "deps": []
 }
